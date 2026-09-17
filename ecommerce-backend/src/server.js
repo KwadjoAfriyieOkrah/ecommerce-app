@@ -62,7 +62,7 @@ app.use(
   cors({
     origin: [
       'http://localhost:3000',           // For local testing
-      'https://your-frontend-url.vercel.app' // Update this later with your actual Vercel URL
+      'https://ecommerce-frontend-sand-xi.vercel.app/' // Update this later with your actual Vercel URL
     ],
     credentials: true,
   })

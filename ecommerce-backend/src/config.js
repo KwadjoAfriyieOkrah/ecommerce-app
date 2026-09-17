@@ -11,10 +11,7 @@ require('dotenv').config();
 // - It is safer to stop the server at startup than to let the app run in a broken state.
 // - Example: if JWT_SECRET is missing, every login request would fail unpredictably.
 const requiredEnvVars = [
-  'DB_HOST',
-  'DB_PORT',
-  'DB_NAME',
-  'DB_USER',
+  'DATABASE_URL',  // ← CHANGED: Now using single connection string instead of DB_HOST, DB_PORT, etc.
   'JWT_SECRET',
   'JWT_EXPIRY',
   'REFRESH_TOKEN_EXPIRY',
@@ -35,7 +32,7 @@ if (missingEnvVars.length > 0) {
 
 // WHY EXPORT AS AN OBJECT?
 // - This creates a single source of truth for configuration.
-// - Other files can use config.db.host, config.jwt.secret, config.server.port instead of repeating process.env everywhere.
+// - Other files can use config.db.url, config.jwt.secret, config.server.port instead of repeating process.env everywhere.
 // - This is easier to maintain, easier to test, and avoids scattered environment lookups.
 // - Alternative: access process.env directly in many files. That is harder to validate and harder to refactor.
 const parsePort = (value, label) => {
@@ -50,11 +47,8 @@ const parsePort = (value, label) => {
 
 const config = {
   db: {
-    host: process.env.DB_HOST,
-    port: parsePort(process.env.DB_PORT, 'DB_PORT'),
-    name: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD || '',
+    url: process.env.DATABASE_URL,  // ← CHANGED: Single connection string for Neon
+    ssl: { rejectUnauthorized: false }, // ← NEW: Required for Neon SSL connections
   },
   jwt: {
     secret: process.env.JWT_SECRET,
@@ -75,6 +69,6 @@ module.exports = config;
 
 // EXAMPLE IMPORT USAGE:
 // const config = require('./config');
-// const pool = new Pool({ host: config.db.host, port: config.db.port, database: config.db.name });
+// const pool = new Pool({ connectionString: config.db.url, ssl: config.db.ssl });
 // const token = jwt.sign({ id: user.id }, config.jwt.secret, { expiresIn: config.jwt.expiry });
 // app.listen(config.server.port);

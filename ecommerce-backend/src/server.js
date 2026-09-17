@@ -60,7 +60,10 @@ const app = express();
 // - With cors(), the backend allows those cross-origin requests to pass.
 app.use(
   cors({
-    origin: true,
+    origin: [
+      'http://localhost:3000',           // For local testing
+      'https://your-frontend-url.vercel.app' // Update this later with your actual Vercel URL
+    ],
     credentials: true,
   })
 );

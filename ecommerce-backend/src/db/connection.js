@@ -25,7 +25,6 @@
 //   - Database errors should be caught by calling code and not exposed directly to
 //     clients, to avoid leaking internal connection details.
 // ============================================================================
-
 const { Pool } = require('pg');
 const config = require('../config');
 
@@ -60,16 +59,13 @@ const config = require('../config');
 // - Industry standard: production applications almost always use a pool because it
 //   is more scalable, resource-efficient, and easier to manage.
 
-// CREATE THE POOL USING THE APP'S DATABASE CONFIGURATION.
-// - config.db.host, config.db.port, config.db.name, and config.db.user are read
-//   from environment variables in ../config.js.
-// - This keeps configuration centralized and easier to manage across the project.
+// CREATE THE POOL USING A SINGLE CONNECTION STRING (Neon format).
+// - config.db.url is the full PostgreSQL connection string from the .env file.
+// - This works for both local PostgreSQL and Neon (hosted PostgreSQL).
+// - config.db.ssl is required for Neon because it uses SSL connections.
 const pool = new Pool({
-  host: config.db.host,
-  port: config.db.port,
-  database: config.db.name,
-  user: config.db.user,
-  password: config.db.password,
+  connectionString: config.db.url,  // ← CHANGED: Single connection string
+  ssl: config.db.ssl,               // ← NEW: SSL config for Neon
   max: 10,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,

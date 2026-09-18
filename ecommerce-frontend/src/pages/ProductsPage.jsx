@@ -36,7 +36,7 @@ function ProductsPage() {
       try {
         setLoading(true);
         const query = selectedCategory === 'all' ? '' : `?category=${encodeURIComponent(selectedCategory)}`;
-        const response = await fetch(`http://localhost:5000/api/products${query}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/products${query}`);
 
         if (!response.ok) {
           throw new Error('Unable to load products');

@@ -22,6 +22,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import API_URL from '../utils/api';
 
 function ProductDetailPage() {
   const { id } = useParams();
@@ -30,11 +31,11 @@ function ProductDetailPage() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
+  const API_URL = import.meta.env.VITE_API_URL;
   useEffect(() => {
     async function fetchProduct() {
       try {
-        const response = await fetch(`http://localhost:5000/api/products/${id}`);
+        const response = await fetch(`${API_URL}/api/products/${id}`);
 
         if (!response.ok) {
           throw new Error('Unable to load product details');

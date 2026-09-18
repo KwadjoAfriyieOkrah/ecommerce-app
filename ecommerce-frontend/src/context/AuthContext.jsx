@@ -16,6 +16,7 @@
 // ============================================================================
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import API_URL from '../utils/api'; 
 
 const AuthContext = createContext(null);
 
@@ -56,6 +57,7 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [user, setUser] = useState(() => safeReadUser());
   const [loading, setLoading] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     if (token) {
@@ -76,7 +78,7 @@ export function AuthProvider({ children }) {
   }, [user]);
 
   const login = async (email, password) => {
-    const response = await fetch('http://localhost:5000/api/auth/login', {
+    const response = await fetch('${API_URL}/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

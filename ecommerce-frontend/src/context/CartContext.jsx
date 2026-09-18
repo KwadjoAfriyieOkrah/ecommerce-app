@@ -72,7 +72,7 @@ export function CartProvider({ children }) {
     }
 
     try {
-      const response = await fetch(`${API_URL}/api/auth/login`, {
+      const response = await fetch(`${API_URL}/api/cart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -120,7 +120,7 @@ export function CartProvider({ children }) {
       return { error: 'Login required to update cart' };
     }
 
-    const response = await fetch(`http://localhost:5000/api/cart/${productId}`, {
+    const response = await fetch(`${API_URL}/api/cart/${productId}`, {
       method: 'PUT',
       headers: getAuthHeaders(),
       body: JSON.stringify({ quantity }),
@@ -143,7 +143,7 @@ export function CartProvider({ children }) {
       return { error: 'Login required to remove item' };
     }
 
-    const response = await fetch(`http://localhost:5000/api/cart/${productId}`, {
+    const response = await fetch(`${API_URL}/api/cart/${productId}`, {
       method: 'DELETE',
       headers: getAuthHeaders(),
     });
@@ -165,7 +165,7 @@ export function CartProvider({ children }) {
       return { error: 'Login required to checkout' };
     }
 
-    const response = await fetch('http://localhost:5000/api/orders', {
+    const response = await fetch(`${API_URL}/api/orders`, {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify({ shippingAddress }),

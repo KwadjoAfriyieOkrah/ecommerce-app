@@ -62,11 +62,13 @@ app.use(
   cors({
     origin: [
       'http://localhost:3000',           // For local testing
-      'https://ecommerce-frontend-sand-xi.vercel.app/' // Update this later with your actual Vercel URL
+      'https://ecommerce-frontend-sand-xi.vercel.app' // Update this later with your actual Vercel URL
     ],
     credentials: true,
   })
 );
+
+
 
 // WHY express.json()?
 // - express.json() parses incoming JSON request bodies into a JavaScript object.

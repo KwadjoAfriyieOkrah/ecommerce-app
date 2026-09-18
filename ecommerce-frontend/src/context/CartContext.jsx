@@ -97,7 +97,7 @@ export function CartProvider({ children }) {
       return { error: 'Login required to add items to cart' };
     }
 
-    const response = await fetch('${API_URL}/api/cart', {
+    const response = await fetch(`${API_URL}/api/cart`, {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify({ productId, quantity }),

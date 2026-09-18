@@ -29,7 +29,7 @@ function OrderDetailsPage() {
   const { token, logout } = useAuth();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
-  const API_URL = import.meta.env.VITE_API_URL;
+
 
   useEffect(() => {
     const fetchOrder = async () => {

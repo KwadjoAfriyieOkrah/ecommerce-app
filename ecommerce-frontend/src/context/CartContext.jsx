@@ -22,7 +22,7 @@ import { createContext, useContext, useMemo, useState } from 'react';
 import API_URL from '../utils/api';
 
 const CartContext = createContext(null);
-const API_URL = import.meta.env.VITE_API_URL;
+
 
 // ────────────────────────────────────────────────────────────────────────
 // FUNCTION: CartProvider({ children })
@@ -72,7 +72,7 @@ export function CartProvider({ children }) {
     }
 
     try {
-      const response = await fetch('${API_URL}/api/auth/login', {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

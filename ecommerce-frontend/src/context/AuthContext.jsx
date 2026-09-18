@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [user, setUser] = useState(() => safeReadUser());
   const [loading, setLoading] = useState(true);
-  
+
 
   useEffect(() => {
     if (token) {
@@ -78,7 +78,7 @@ export function AuthProvider({ children }) {
   }, [user]);
 
   const login = async (email, password) => {
-    const response = await fetch('${API_URL}/api/auth/login', {
+    const response = await fetch(`${API_URL}/api/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

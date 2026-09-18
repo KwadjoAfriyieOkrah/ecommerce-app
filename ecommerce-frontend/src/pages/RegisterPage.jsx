@@ -26,7 +26,7 @@ function RegisterPage() {
     phone: '',
   });
   const [message, setMessage] = useState('');
-  const API_URL = import.meta.env.VITE_API_URL;
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -40,7 +40,7 @@ function RegisterPage() {
     event.preventDefault();
 
     try {
-      const response = await fetch('${API_URL}/api/auth/register', {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

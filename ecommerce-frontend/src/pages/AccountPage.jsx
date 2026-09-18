@@ -31,7 +31,7 @@ function AccountPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
-  const API_URL = import.meta.env.VITE_API_URL;
+  
 
   useEffect(() => {
     const fetchAccountData = async () => {
@@ -103,7 +103,7 @@ function AccountPage() {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/profile', {
+      const response = await fetch(`${API_URL}/api/auth/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

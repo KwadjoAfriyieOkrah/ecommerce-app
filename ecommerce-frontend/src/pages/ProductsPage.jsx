@@ -22,7 +22,6 @@ import { useCart } from '../context/CartContext';
 import API_URL from '../utils/api';
 
 const categories = ['all', 'electronics', 'fashion', 'home', 'accessories'];
-const API_URL = import.meta.env.VITE_API_URL;
 
 function ProductsPage() {
   const navigate = useNavigate();
@@ -38,7 +37,7 @@ function ProductsPage() {
       try {
         setLoading(true);
         const query = selectedCategory === 'all' ? '' : `?category=${encodeURIComponent(selectedCategory)}`;
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/products${query}`);
+        const response = await fetch(`${API_URL}/api/products${query}`);
 
         if (!response.ok) {
           throw new Error('Unable to load products');

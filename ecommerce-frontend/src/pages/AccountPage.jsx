@@ -21,6 +21,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import API_URL from '../utils/api'; 
 
 function AccountPage() {
   const navigate = useNavigate();
@@ -30,17 +31,18 @@ function AccountPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchAccountData = async () => {
       try {
         const [profileResponse, ordersResponse] = await Promise.all([
-          fetch('http://localhost:5000/api/auth/me', {
+          fetch('${API_URL}/api/auth/login', {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }),
-          fetch('http://localhost:5000/api/orders', {
+          fetch('${API_URL}/api/auth/login', {
             headers: {
               Authorization: `Bearer ${token}`,
             },

@@ -19,8 +19,10 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import API_URL from '../utils/api';
 
 const categories = ['all', 'electronics', 'fashion', 'home', 'accessories'];
+const API_URL = import.meta.env.VITE_API_URL;
 
 function ProductsPage() {
   const navigate = useNavigate();

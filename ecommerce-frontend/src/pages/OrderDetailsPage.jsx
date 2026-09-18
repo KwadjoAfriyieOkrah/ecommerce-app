@@ -21,6 +21,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import API_URL from '../utils/api';
 
 function OrderDetailsPage() {
   const { id } = useParams();
@@ -28,11 +29,12 @@ function OrderDetailsPage() {
   const { token, logout } = useAuth();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/orders/${id}`, {
+        const response = await fetch(`${API_URL}/api/products/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
